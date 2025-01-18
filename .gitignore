@@ -10,5 +10,5 @@ config.log
 *.tar.gz
 .deps
 .libs
-m4
 configure
+m4
