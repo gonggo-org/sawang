@@ -1,5 +1,11 @@
 # Installing Sawang on Linux:
 
+## Build Dependency
+
+Sawang depends on cJSON shared library. Please refer to (cJSON build)[https://github.com/gonggo-org/gonggo/blob/main/INSTALL.md].
+
+## Build Sawang
+
 Sawang is a shared library for Gonggo proxy development. It provides a set of header file under sawang sub directory and a shared object **libsawang.so**.
 
 1. Type `autoreconf -i` to remake the GNU Build System files in specified DIRECTORIES and their subdirectories.
