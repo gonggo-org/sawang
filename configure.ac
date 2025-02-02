@@ -18,7 +18,7 @@ AC_MSG_NOTICE([HOST is "$host"])
 AM_INIT_AUTOMAKE([subdir-objects -Wall -Werror foreign])
 
 # glib-2.0 library dependency
-PKG_CHECK_MODULES([DEPS], [glib-2.0 uuid])
+PKG_CHECK_MODULES([DEPS], [glib-2.0 uuid libcjson])
 
 # Set C compiler
 AC_PROG_CC
