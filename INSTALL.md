@@ -2,7 +2,7 @@
 
 ## Build Dependency
 
-Sawang depends on cJSON shared library. Please refer to (cJSON build)[https://github.com/gonggo-org/gonggo/blob/main/INSTALL.md].
+Sawang depends on cJSON shared library as Gonggo does (you need not to built cJSON if you have done it for Gonggo). Please refer to (cJSON build)[https://github.com/gonggo-org/gonggo/blob/main/INSTALL.md].
 
 ## Build Sawang
 
