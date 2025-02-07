@@ -249,6 +249,7 @@ static bool proxy_channel_exchange() {
     invalid_status = 0;
     payload = NULL;    
     unsubscribe_task_key = NULL;
+    service_name = "";
 
     service_and_payload = proxy_channel_payload_shm_read(proxy_channel_shm->rid, proxy_channel_shm->payload_buff_length);
     if(service_and_payload==NULL) {
