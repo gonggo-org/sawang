@@ -3,6 +3,7 @@ libsawang_la_SOURCES += \
     gear/callback.h \
 	gear/confvar.c gear/confvar.h \
     gear/error.h \
+    gear/glibshim.c gear/glibshim.h \
     gear/globaldata.h \
     gear/gonggoalive.c gear/gonggoalive.h \
     gear/log.c gear/log.h \

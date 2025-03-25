@@ -1,6 +1,10 @@
 #include "respondtable.h"
 #include "util.h"
 
+#ifdef GLIBSHIM
+#include "glibshim.h"
+#endif //GLIBSHIM
+
 static bool respond_table_has_lock = false;
 static pthread_mutex_t respond_table_lock;
 

@@ -20,6 +20,11 @@ AM_INIT_AUTOMAKE([subdir-objects -Wall -Werror foreign])
 # glib-2.0 library dependency
 PKG_CHECK_MODULES([DEPS], [glib-2.0 uuid libcjson])
 
+AC_ARG_ENABLE([glibshim],
+	[AS_HELP_STRING([--enable-glibshim], [Enable shim for glib])]
+	)
+AM_CONDITIONAL([GLIBSHIM], [test "x$enable_glibshim" == "xyes"])
+
 # Set C compiler
 AC_PROG_CC
 

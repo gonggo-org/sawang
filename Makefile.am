@@ -11,6 +11,10 @@ libsawang_la_LDFLAGS = -version-info 1:0:0
 AM_CFLAGS = $(DEPS_CFLAGS) -Wall -Werror
 LIBS = $(DEPS_LIBS) -lpthread -lrt
 
+if GLIBSHIM
+AM_CFLAGS += -DGLIBSHIM
+endif
+
 pkginclude_HEADERS = /usr/local/include/cjson/cJSON.h \
     gear/callback.h \
 	gear/confvar.h \
