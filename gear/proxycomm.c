@@ -62,7 +62,7 @@ void* proxy_comm(void *arg) {
 
     proxy_comm_started = true;
     if(proxy_comm_f_start!=NULL) { 
-        proxy_comm_f_start();
+        proxy_comm_f_start((const ProxyCommData*)arg);
     }
     pthread_mutex_lock(&proxy_comm_lock);
     while(!proxy_comm_end) {

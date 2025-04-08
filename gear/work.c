@@ -102,6 +102,8 @@ int work(pid_t pid, const ConfVar *cv_head,
 	proxy_comm_context_init(f_start, f_run, f_multirespond_clear, f_stop);
 ////thread context initialization:END
 
+	ProxyCommData proxy_comm_data = {.cv_head = cv_head};
+
     pthread_attr_init(&thread_attr);
     pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_JOINABLE);
 	bool started = false;
@@ -124,7 +126,7 @@ int work(pid_t pid, const ConfVar *cv_head,
 		}
 		gonggo_alive_waitfor_started();
 
-		if(pthread_create(&t_proxy_comm, &thread_attr, proxy_comm, NULL)!=0) {
+		if(pthread_create(&t_proxy_comm, &thread_attr, proxy_comm, &proxy_comm_data)!=0) {
 			proxy_log("ERROR", "cannot start server, %s", "proxy communication thread creation is failed");
 			break;
 		}

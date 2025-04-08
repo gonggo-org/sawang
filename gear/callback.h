@@ -6,12 +6,17 @@
 
 #include "cJSON.h"
 #include "define.h"
+#include "confvar.h"
 
 enum ProxyPayloadParseResult {
     PARSE_INVALID = 1,
     PARSE_SINGLESHOT = 2,
     PARSE_MULTIRESPOND = 3
 };
+
+typedef struct ProxyCommData {
+    const ConfVar *cv_head;
+} ProxyCommData;
 
 typedef struct ProxyReplyArg {
     char *service;
@@ -35,7 +40,7 @@ typedef enum ProxyPayloadParseResult (*ProxyPayloadParse) (
     cJSON **normalized_payload, 
     bool *unsubscribe,
     unsigned int *invalid_status);
-typedef void (*ProxyStart) (void);
+typedef void (*ProxyStart) (const ProxyCommData *pcd);
 typedef void (*ProxyRun) (ProxyReplyArg *arg, ProxyReply f_proxy_reply, ProxyFree f_proxy_free);
 typedef void (*ProxyMultiRespondClear) (ProxyReplyArg *arg, ProxyFree f_proxy_free);
 typedef void (*ProxyStop) (void);
