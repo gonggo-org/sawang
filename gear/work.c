@@ -31,7 +31,8 @@ static void threads_stop(pthread_t t_proxy_channel, pthread_t t_proxy_subscribe,
 
 int work(pid_t pid, const ConfVar *cv_head, 
 	ProxyPayloadParse f_payload_parse, 
-	ProxyStart f_start, ProxyRun f_run, ProxyMultiRespondClear f_multirespond_clear, ProxyStop f_stop) 
+	ProxyStart f_start, ProxyRun f_run, ProxyMultiRespondClear f_multirespond_clear, ProxyStop f_stop,
+	ProxyRest f_rest) 
 {
 	struct sigaction action;	
 	char buff[PROXYLOGBUFLEN];
@@ -78,7 +79,7 @@ int work(pid_t pid, const ConfVar *cv_head,
 	}	
 
 ////thread context initialization:BEGIN	    
-    if(!proxy_channel_context_init(f_payload_parse)) {
+    if(!proxy_channel_context_init(f_payload_parse, f_rest)) {
 		clean_up();
 		return ERROR_START;
 	}

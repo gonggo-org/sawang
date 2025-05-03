@@ -5,7 +5,7 @@
 
 #include "callback.h"
 
-extern bool proxy_channel_context_init(ProxyPayloadParse f_payload_parse);
+extern bool proxy_channel_context_init(ProxyPayloadParse f_payload_parse, ProxyRest f_rest);
 extern void proxy_channel_shm_unlink_enable(void);
 extern void proxy_channel_context_destroy(void);
 extern void* proxy_channel(void *arg);

@@ -40,6 +40,8 @@ enum ProxyChannelState {
     CHANNEL_FAILS = 4,
     CHANNEL_DONE = 5,
     CHANNEL_STOP_REQUEST = 6,
+    CHANNEL_REST = 10,
+    CHANNEL_REST_RESPOND = 11,
     CHANNEL_TERMINATION = 99
 };
 
@@ -52,6 +54,9 @@ typedef struct ProxyChannelShm {
     enum ProxyChannelState state;
     char rid[UUIDBUFLEN]; //request id
     size_t payload_buff_length;
+////REST:
+    char aid[UUIDBUFLEN]; //rest answer id
+    size_t answer_buff_length;
 } ProxyChannelShm;
 
 enum ProxySubscribeState {

@@ -23,6 +23,12 @@ typedef struct ProxyReplyArg {
     cJSON *payload; 
 } ProxyReplyArg;
 
+typedef struct ProxyRestRespond {
+    int code;
+    char *err;
+    cJSON *json;
+} ProxyRestRespond;
+
 typedef void (*ProxyReply) (const ProxyReplyArg *arg, cJSON *headers, cJSON *payload);
 typedef void (*ProxyFree) (ProxyReplyArg *arg);
 
@@ -44,5 +50,6 @@ typedef void (*ProxyStart) (const ProxyCommData *pcd);
 typedef void (*ProxyRun) (ProxyReplyArg *arg, ProxyReply f_proxy_reply, ProxyFree f_proxy_free);
 typedef void (*ProxyMultiRespondClear) (ProxyReplyArg *arg, ProxyFree f_proxy_free);
 typedef void (*ProxyStop) (void);
+typedef void (*ProxyRest) (const char *endpoint, const cJSON *payload, ProxyRestRespond *respond);
 
 #endif //_CALLBACK_H_
