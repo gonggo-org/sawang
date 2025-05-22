@@ -38,7 +38,7 @@ static char* proxy_channel_path_create(void);
 static bool proxy_channel_shm_create(const char *proxy_path);
 static void proxy_channel_shm_idle(void);
 static bool proxy_channel_exchange(void);
-static bool proxy_channel_rest(void);
+static bool proxy_channel_rest(const ConfVar *cv_head);
 static cJSON* proxy_channel_payload_shm_read(const char *rid, size_t buff_length);
 static char* proxy_channel_respond_create(int code, const char* err, cJSON *json);
 static size_t proxy_rest_create_answer(const char *path, const char *respond);
@@ -87,6 +87,10 @@ void proxy_channel_context_destroy(void) {
 }
 
 void* proxy_channel(void *arg) {
+    const ConfVar *cv_head;
+
+    cv_head = (const ConfVar *)arg;
+
     proxy_log("INFO", "proxy %s channel thread is started", proxy_name);
 
     if(pthread_mutex_lock(&proxy_channel_shm->lock) == EOWNERDEAD) {
@@ -117,7 +121,7 @@ void* proxy_channel(void *arg) {
             }
         } else if (proxy_channel_shm->state==CHANNEL_REST) {
             proxy_log("INFO", "proxy %s channel receive CHANNEL_REST", proxy_name);
-            if(!proxy_channel_rest()) {
+            if(!proxy_channel_rest(cv_head)) {
                 break;
             }
         }
@@ -374,7 +378,7 @@ static char* proxy_channel_respond_create(int code, const char* err, cJSON *json
     return s;
 }
 
-static bool proxy_channel_rest(void) {
+static bool proxy_channel_rest(const ConfVar *cv_head) {
     bool alive = true;
     cJSON *service_and_payload = NULL, *service, *payload;
     const char *endpoint;
@@ -399,7 +403,7 @@ static bool proxy_channel_rest(void) {
             rest_respond.code = 0;
             rest_respond.err = NULL;
             rest_respond.json = NULL;
-            proxy_rest(endpoint, payload, &rest_respond);            
+            proxy_rest(cv_head, endpoint, payload, &rest_respond);            
             if(rest_respond.code == 0) {
                 rest_respond.code = 503;
                 rest_respond.err = strdup("REST endpoint is not implemented");

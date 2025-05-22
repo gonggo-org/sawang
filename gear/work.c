@@ -109,7 +109,7 @@ int work(pid_t pid, const ConfVar *cv_head,
     pthread_attr_setdetachstate(&thread_attr, PTHREAD_CREATE_JOINABLE);
 	bool started = false;
 	do {
-		if(pthread_create(&t_proxy_channel, &thread_attr, proxy_channel, NULL)!=0) {
+		if(pthread_create(&t_proxy_channel, &thread_attr, proxy_channel, (void*)cv_head)!=0) {
 			proxy_log("ERROR", "cannot start server, %s", "proxy channel thread creation is failed");
 			break;
 		}
