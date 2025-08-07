@@ -17,5 +17,6 @@ extern void reply_queue_append(cJSON *rid, cJSON *headers, cJSON *payload, bool 
 extern void reply_queue_append_invalid_status(const char *rid, int status);
 extern ReplyQueueTask *reply_queue_pop_head(void);
 extern void reply_queue_push_head(GQueue *src);
+extern void reply_queue_task_destroy(ReplyQueueTask* task);
 
 #endif //_REPLYQUEUE_H_

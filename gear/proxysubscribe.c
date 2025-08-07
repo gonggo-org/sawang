@@ -113,14 +113,14 @@ void* proxy_subscribe(void *arg) {
             pthread_mutex_unlock(&proxy_subscribe_shm->lock);
             
             if(!alive) {
-                free(task);
+                reply_queue_task_destroy(task);                
                 break;
             }
 
             if(state!=SUBSCRIBE_DONE) {
                 g_queue_push_tail(failed_task, task);
             } else {
-                free(task);
+                reply_queue_task_destroy(task);
             }
             proxy_subscribe_shm_idle();//set state to subscribe_IDLE
         }

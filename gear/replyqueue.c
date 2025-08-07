@@ -3,7 +3,6 @@
 
 static GQueue *reply_queue = NULL;
 static pthread_mutex_t reply_queue_lock;
-static void reply_queue_task_destroy(ReplyQueueTask* task);
 
 void reply_queue_create(void) {
     pthread_mutexattr_t mtx_attr;
@@ -75,7 +74,7 @@ void reply_queue_push_head(GQueue *src) {
     pthread_mutex_unlock(&reply_queue_lock);
 }
 
-static void reply_queue_task_destroy(ReplyQueueTask* task) {
+void reply_queue_task_destroy(ReplyQueueTask* task) {
     if(task!=NULL) {
         if(task->task!=NULL) {
             free(task->task);
