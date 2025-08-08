@@ -132,7 +132,7 @@ void* proxy_subscribe(void *arg) {
         }
     }
     pthread_mutex_unlock(&proxy_subscribe_lock);
-    g_queue_free_full(failed_task, (GDestroyNotify)free);
+    g_queue_free_full(failed_task, (GDestroyNotify)reply_queue_task_destroy);
 
     proxy_log("INFO", "proxy %s subscribe thread is stopped", proxy_name);
     pthread_exit(NULL);
