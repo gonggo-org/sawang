@@ -19,7 +19,6 @@ static pthread_mutex_t proxy_comm_lock;
 static pthread_cond_t proxy_comm_wakeup;
 
 //function
-static ProxyReplyArg *proxy_comm_create_reply_arg(const char *task_key);
 static void proxy_comm_reply(const ProxyReplyArg *arg, cJSON *headers, cJSON *payload);
 static void proxy_comm_drop_multirespond_request(const cJSON *payload);
 static ProxyReplyArg *proxy_comm_create_reply_arg(const char *task_key);

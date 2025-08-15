@@ -114,6 +114,7 @@ static ProxyActivationShm* proxy_activation_get_map(bool activation) {
         return NULL;
     }
 
+    free(gonggo_path);
     close(fd);
 
     if(pthread_mutex_lock(&map->lock)==EOWNERDEAD) {
