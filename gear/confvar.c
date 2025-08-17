@@ -170,9 +170,6 @@ static ConfVar* create(FILE *fp) {
                 run->next = p;
             run = p;
         }
-        free(lineptr);
-        lineptr = NULL;
-        n = 0;
     }
     if(lineptr!=NULL) {
         free(lineptr);

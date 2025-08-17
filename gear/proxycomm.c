@@ -160,14 +160,12 @@ static void proxy_comm_reply(const ProxyReplyArg *arg, cJSON *headers, cJSON *pa
             if(which==RESPONDTABLE_SINGLESHOT) {
                 respond_table_drop(RESPONDTABLE_SINGLESHOT, task_key, request_uuid, NULL);                   
             }
-            free(request_uuid);
         }
     } else if(request_uuid_arr->len==1) {
         request_uuid = (char*)g_ptr_array_index(request_uuid_arr, 0);
         rid = cJSON_CreateString(request_uuid);
-        free(request_uuid);
     }
-    g_ptr_array_free(request_uuid_arr, false);
+    g_ptr_array_free(request_uuid_arr, true);
     free(task_key);
 
     if(rid!=NULL) {
